@@ -11,93 +11,93 @@ var game = {
     green: new Audio("https://s3.amazonaws.com/freecodecamp/simonSound4.mp3")
   },
   strict: false
-};
+}
 
-$("#ssd").sevenSeg({ digits: 2, decimalPoint: false, value: null });
+$("#ssd").sevenSeg({ digits: 2, decimalPoint: false, value: null })
 
 function togglePower() {
   if (!game.power) {
-    game.power = true;
-    $("#ssd").sevenSeg({ value: "00" });
+    game.power = true
+    $("#ssd").sevenSeg({ value: "00" })
   } else {
-    game.power = false;
-    game.strict = false;
-    $("#ssd").sevenSeg({ value: null });
-    document.getElementById("strictLght").style.backgroundColor = "black";
+    game.power = false
+    game.strict = false
+    $("#ssd").sevenSeg({ value: null })
+    document.getElementById("strictLght").style.backgroundColor = "black"
   }
 }
 
 function toggleStrict() {
   if (game.power) {
     if (!game.strict) {
-      game.strict = true;
-      document.getElementById("strictLght").style.backgroundColor = "red";
+      game.strict = true
+      document.getElementById("strictLght").style.backgroundColor = "red"
     } else {
-      game.strict = false;
-      document.getElementById("strictLght").style.backgroundColor = "black";
+      game.strict = false
+      document.getElementById("strictLght").style.backgroundColor = "black"
     }
   }
 }
 
 function clear() {
-  game.gameSequence = [];
-  game.count = "00";
-  $("#ssd").sevenSeg({ value: game.count });
+  game.gameSequence = []
+  game.count = "00"
+  $("#ssd").sevenSeg({ value: game.count })
 
-  addSequence();
+  addSequence()
 }
 
 function addSequence() {
-  game.gameSequence.push(game.possibilities[Math.round(Math.random() * 3)]);
+  game.gameSequence.push(game.possibilities[Math.round(Math.random() * 3)])
 
-  playSequence();
+  playSequence()
 }
 
 function playSequence() {
-  var i = 0;
+  var i = 0
 
   var interval = setInterval(function() {
-    flashColor(document.getElementById(game.gameSequence[i]));
+    flashColor(document.getElementById(game.gameSequence[i]))
 
-    i++;
+    i++
     if (i >= game.gameSequence.length) {
-      clearInterval(interval);
+      clearInterval(interval)
     }
-  }, 700);
+  }, 700)
 
-  clearPlayer();
+  clearPlayer()
 }
 
 function flashColor(btn) {
-  btn.alpha(100);
-  sound(btn.id);
+  btn.alpha(100)
+  sound(btn.id)
   setTimeout(function() {
-    btn.alpha(50);
-  }, 600);
+    btn.alpha(50)
+  }, 600)
 }
 
 function userFlashColor(btn) {
-  btn.alpha(100);
-  sound(btn.id);
+  btn.alpha(100)
+  sound(btn.id)
   setTimeout(function() {
-    btn.alpha(50);
-  }, 80);
+    btn.alpha(50)
+  }, 80)
 }
 
 function sound(color) {
   switch (color) {
     case "green":
-      game.sound.green.play();
-      break;
+      game.sound.green.play()
+      break
     case "blue":
-      game.sound.blue.play();
-      break;
+      game.sound.blue.play()
+      break
     case "red":
-      game.sound.red.play();
-      break;
+      game.sound.red.play()
+      break
     case "yellow":
-      game.sound.yellow.play();
-      break;
+      game.sound.yellow.play()
+      break
   }
 }
 
@@ -105,21 +105,21 @@ HTMLElement.prototype.alpha = function(a) {
   current_color = getComputedStyle(this).getPropertyValue("background-color");
   match = /rgba?\((\d+)\s*,\s*(\d+)\s*,\s*(\d+)\s*(,\s*\d+[\.\d+]*)*\)/g.exec(
     current_color
-  );
+  )
   a = a > 1 ? a / 100 : a;
   this.style.backgroundColor =
-    "rgba(" + [match[1], match[2], match[3], a].join(",") + ")";
+    "rgba(" + [match[1], match[2], match[3], a].join(",") + ")"
 };
 
 function clearPlayer() {
-  game.player = [];
+  game.player = []
 }
 
 function addToPlayer(elem) {
-  game.player.push(elem);
-  userFlashColor(document.getElementById(elem));
-  console.log(game.player);
-  playerTurn(elem);
+  game.player.push(elem)
+  userFlashColor(document.getElementById(elem))
+  console.log(game.player)
+  playerTurn(elem)
 }
 
 function start() {
@@ -135,25 +135,27 @@ function playerTurn(x) {
   ) {
     $("#ssd").sevenSeg({ value: "--" });
     setTimeout(function() {
-      $("#ssd").sevenSeg({ value: game.count });
-    }, 1000);
+      $("#ssd").sevenSeg({ value: game.count })
+    }, 1000)
     if (game.strict) {
-      clear();
+      clear()
     } else {
-      playSequence();
+      setTimeout(function() {
+        playSequence()
+      }, 500)
     }
   } else {
-    var check = game.player.length === game.gameSequence.length;
+    var check = game.player.length === game.gameSequence.length
     if (check) {
-      game.count++;
-      $("#ssd").sevenSeg({ value: game.count });
+      game.count++
+      $("#ssd").sevenSeg({ value: game.count })
       if (game.count === 20) {
-        alert("You won!");
-        clear();
+        alert("You won!")
+        clear()
       } else {
         setTimeout(function() {
-          addSequence();
-        }, 500);
+          addSequence()
+        }, 500)
       }
     }
   }
