@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <title>Simon</title>
+  <link rel="stylesheet" type="text/css" href="//netdna.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <link rel="stylesheet" type="text/css" href="style.css" >
+</head>
+
+<body>
+  <div class="container">
+    <div class="outer-circle">
+      <div class="color-circle">
+        <div id="green" class="quarter" onclick="addToPlayer(this.id)"></div>
+        <div id="red" class="quarter" onclick="addToPlayer(this.id)"></div>
+        <div id="yellow" class="quarter" onclick="addToPlayer(this.id)"></div>
+        <div id="blue" class="quarter" onclick="addToPlayer(this.id)"></div>
+      </div>
+      <div class="vert-bar"></div>
+      <div class="horz-bar"></div>
+      <div class="inner-circle"></div>
+      <div class="controls">
+        <h1 class="brand">Simon<span class="small">®</span></h1>
+        <div id=ssdBox>
+          <div id="ssd"></div>
+          <p id="ssdText">Count</p>
+        </div>
+        <div id="startBox">
+          <div id="startBtn" onclick="start()"></div>
+          <p id="ssdText">Start</p>
+        </div>
+        <div id="strictBox">
+          <div id="strictLght"></div>
+          <div id="strictBtn" onclick="toggleStrict()"></div>
+          <p id="ssdText">Strict</p>
+        </div>
+        <div id="powerBox">
+          <p class="powerText">Off</p>
+          <label class="switch">
+            <input type="checkbox" onclick="togglePower()">
+            <span class="slider"></span>
+          </label>
+          <p class="powerText">On</p>
+        </div>
+      </div>
+    </div>
+  </div>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/sevenSeg.js/0.2.0/sevenSeg.min.js"></script>
+  <script src="javascript.js"></script>
+</body>
+
+</html>
